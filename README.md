@@ -1,4 +1,4 @@
-# 📊 Statistics Automation Tool
+# 📊 RankStat
 
 A simple and efficient tool that automates the calculation of statistics for surveys and research data.  
 It allows users to input questions, response items, and their frequencies, then generates a complete statistical summary including weighted totals, ranking, and mean.
@@ -38,4 +38,9 @@ Automates computation for weighted statistics table.
 
 ---
 
-
+## 🛠 Technologies Used
+- HTML
+- CSS
+- JavaScript
+- Flask
+- Bootstrap
