@@ -1,0 +1,133 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RankStat</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="stepper.css" rel="stylesheet">
+    <link rel="icon" href="assets/statistics.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  </head>
+
+  <body>
+
+    <div class="px-4 pt-5 mt-5 text-center heroBG">
+      <img class="d-block mx-auto mb-4" src="assets/statistics.png" alt="" width="72" height="72">
+      <h1 class="display-4 fw-bold text-body-emphasis">RankStat</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">No more waiting for results! RankStat's lightning-fast computations process even the largest data sets with blazing speed. Spend less time crunching numbers and more time extracting valuable insights! </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <button type="button" class="btn btn-primary btn-lg px-4">Try it out.</button>
+        </div>
+      </div>
+      <div class="overflow-hidden" style="max-height: 30vh;">
+        <div class="container px-5">
+          <img src="assets/HeroPic.jpg" class="img-fluid border rounded-3 shadow-lg mb-1" alt="Example image" width="700" height="500" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="" id="InputOutput">
+      
+
+    <section class="step-wizard">
+      <ul class="step-wizard-list mb-4">
+          <li class="step-wizard-item current-item">
+              <span class="progress-count">1</span>
+              <span class="progress-label">Questions & Response Items</span>
+          </li>
+          <li class="step-wizard-item">
+              <span class="progress-count">2</span>
+              <span class="progress-label">Question Names & Frequencies</span>
+          </li>
+          <li class="step-wizard-item ">
+              <span class="progress-count">3</span>
+              <span class="progress-label">Displaying Output</span>
+          </li>
+      </ul>
+
+      <div class="container" id="input1">
+
+        <div class="container d-flex flex-column p-4" id="inputGroup">
+
+          <div class="container m-0 p-0 d-inline-flex">
+            <p class="p-1 px-3 m-0 mb-2" style="color: rgb(0, 170, 255); border: 2px solid rgb(0, 170, 255); border-radius: 5px;">
+              Part 1:
+            </p>
+          </div>
+
+          <h2 class="mb-4">Questions and Response Item Quantity</h2>
+          
+          <div class="mb-4">
+            <label for="exampleFormControlInput1" class="form-label">Enter Title of Ordinal Statistics Data</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="'Satisfication Survey about Project Proposal'">
+          </div>
+
+          <div class="container p-0">
+            <label for="ResponseItems" class="form-label">Enter Response Items and its Labels</label>
+            <div class="input-group flex-nowrap py-2">
+              <span class="input-group-text px-4" id="addon-wrapping">1</span>
+              <input type="text" class="form-control" placeholder="Strongly Disagree" aria-describedby="addon-wrapping">
+              <button class="btn btn-outline-secondary px-3 ms-3" type="button" id="button-addon1" style="min-width: auto; border-radius: 5px;">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+              <!-- <span class="input-group-text px-2 ms-3" id="delBtn">
+                <i class="bi bi-trash-fill"></i>
+              </span> -->
+            </div>
+            <div class="input-group flex-nowrap py-2">
+              <span class="input-group-text px-4" id="addon-wrapping">2</span>
+              <input type="text" class="form-control" placeholder="Disagree" aria-describedby="addon-wrapping">
+              <button class="btn btn-outline-secondary px-3 ms-3" type="button" id="button-addon1" style="min-width: auto; border-radius: 5px;">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </div>
+            <div class="input-group flex-nowrap py-2">
+              <span class="input-group-text px-4" id="addon-wrapping">3</span>
+              <input type="text" class="form-control" placeholder="Agree" aria-describedby="addon-wrapping">
+              <button class="btn btn-outline-secondary px-3 ms-3" type="button" id="button-addon1" style="min-width: auto; border-radius: 5px;">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </div>
+            <div class="input-group flex-nowrap py-2">
+              <span class="input-group-text px-4" id="addon-wrapping">4</span>
+              <input type="text" class="form-control" placeholder="Strongly Agree" aria-describedby="addon-wrapping">
+              <button class="btn btn-outline-secondary px-3 ms-3" type="button" id="button-addon1" style="min-width: auto; border-radius: 5px;">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </div>
+            <button class="btn btn-outline-secondary mt-3" type="button" id="button-addon1" style="min-width:100%; border-radius: 5px;">
+              <i class="bi bi-plus-circle"></i>
+              Add Response Items
+            </button>
+
+          </div>
+
+        </div>
+        <div class="container d-flex flex-row-reverse p-3" id="btnGroup">
+          <button type="button" class="btn btn-primary btn-lg px-4">Next</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4 mx-3">Clear</button>
+        </div>
+      </div>
+
+    </section>
+
+    
+
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+
+</html>
+
+
+

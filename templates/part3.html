@@ -1,0 +1,121 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RankStat</title>
+    <link rel = "icon" href = "{{ url_for('static', filename = 'statistics.png') }}">   
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/bootstrap.min.css')}}">   
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/style.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/stepper.css') }}">
+
+  </head>
+
+  <body>
+
+    <!-- part 3 -->
+    <div class="" id="InputOutput">
+      
+      <section class="step-wizard">
+        <ul class="step-wizard-list mb-4">
+            <li class="step-wizard-item">
+                <span class="progress-count">1</span>
+                <span class="progress-label">Questions & Response Items</span>
+            </li>
+            <li class="step-wizard-item">
+                <span class="progress-count">2</span>
+                <span class="progress-label">Question Names & Frequencies</span>
+            </li>
+            <li class="step-wizard-item current-item">
+                <span class="progress-count">3</span>
+                <span class="progress-label">Displaying Output</span>
+            </li>
+        </ul>
+  
+        <div class="container" id="input1">
+  
+          <div class="container d-flex flex-column p-0" id="inputGroup">
+            
+            <div class="container p-4">
+              <div class="container m-0 p-0 d-inline-flex">
+                <p class="p-1 px-3 m-0 mb-2" style="color: rgb(0, 170, 255); border: 2px solid rgb(0, 170, 255); border-radius: 5px;">
+                  Part 3:
+                </p>
+              </div>
+    
+              <h2 class="mb-1">Finalizing for Displaying Output</h2>
+            </div>
+
+            <div class="container px-4">
+              <p class="m-0">The Collection of Data is about:</p>
+              <h5 class="mb-0">{{ title }}</h5>
+            </div>
+
+            <div class="container p-4 mb-2">
+                
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Questions</th>
+                    {% for n in response_items %}
+                    <th scope="col">{{ loop.index }}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for key, value in q_and_f.items() %}
+                    <tr>
+                      <th scope="row">{{ loop.index }}</th>
+                      <td>{{ key }}</td>
+                      
+                      {% for f in value %}
+                        <td>{{ f }}</td>
+                      {% endfor %}
+                    </tr>
+                  {% endfor %}
+
+                  <tr>
+                </tbody>
+              </table>
+              {% for r in response_items %}
+              <span class="badge rounded-pill text-bg-secondary">{{ loop.index }} - {{ r }}</span>
+              {% endfor %}
+            </div>
+
+            
+
+  
+          </div>
+          <div class="container d-flex flex-row-reverse p-3" id="btnGroup">
+            <form action="/goto_part4" method='POST'>
+            <button type="submit" class="btn btn-primary btn-lg px-4">Submit</button>
+            </form>
+          <form action = "/return_part2" method = "POST">
+            <button type="submit" class="btn btn-outline-secondary btn-lg px-4 mx-3">Back</button>
+          </form>
+          </div>
+        </div>
+  
+      </section>
+  
+      
+  
+    </div>
+
+    
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+
+</html>
+
+
+

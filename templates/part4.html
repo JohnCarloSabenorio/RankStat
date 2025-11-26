@@ -1,0 +1,533 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RankStat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/scrollbar.css')}}">   
+
+    <link rel = "icon" href = "{{ url_for('static', filename = 'statistics.png') }}">   
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/bootstrap.min.css')}}">   
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/style.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/stepper.css') }}">
+
+  </head>
+
+  <body id="style-5">
+
+    <!-- Part 4 -->
+    <div class="d-flex justify-content-center" id="resultsPage">
+      
+        <div class="container d-flex flex-column" id="whitePage">
+
+            <div class="container d-flex flex-row justify-content-between align-items-center" id="topSection">
+
+                <div class="container d-flex flex-row align-items-center">
+                    <img class="me-1" src="{{url_for('static', filename='statistics.png')}}" alt="" width="50" height="50">
+                    <div class="container m-0 pt-1 d-flex flex-column">
+                        <h4 class="m-0">RankStat</h3>
+                        <p class="m-0">Ordinal Data Analyzer</p>
+                    </div>
+                </div>
+                <div class="container text-center ">
+                    <h3 class="m-0">Results Page</h3>
+                </div>
+                <div class="container">
+                    
+                    <form action = "/goto_part1" method = "POST">
+                        <button type="submit" class="btn btn-primary float-end"> <i class="bi bi-file-earmark-plus me-2"></i>New Data</button>
+                    </form>
+                </div>
+                
+            </div>
+
+            <div class="container justify-content-center align-items-center" id="bluGradient">
+                <div class="container d-flex justify-content-center  position-relative" style="width: 100%; height: 100%;">
+                    <div class="container d-flex flex-column text-center" style="margin-top: 50px;">
+                        <p class="mb-2" style="color: white;">
+                            Ordinal Data Analysis:
+                        </p>
+                        <h3 style="color: white;">
+                            {{ title }}
+                        </h3>
+                    </div>
+                    <div class="container position-absolute top-100 start-50 translate-middle" id="whiteUnderBlu">
+                        <div class="row">
+
+                            <div class="col p-3">
+                                <div class="container d-flex flex-row justify-content-center align-items-center" style="color: rgb(93, 90, 90);
+                                border-right: 1px solid grey;">
+                                    <i class="bi bi-question-circle "style="font-size: 50px;"></i>
+                                    <div class="container d-flex flex-column">
+                                        <p class="m-0 lh-1 pt-2" style="font-size: 16px;">Total Questions: </p>
+                                        <h2 class="m-0">{{ total_questions }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col p-3">
+                                <div class="container d-flex flex-row align-self-start" style="color: rgb(93, 90, 90);"> 
+                                    <i class="bi bi-clipboard2-pulse "style="font-size: 50px;"></i>
+                                    <div class="container d-flex flex-column">
+                                        <p class="m-0 lh-1 pt-2" style="font-size: 16px;">Response Items per Questions:</p>
+                                        <h2 class="m-0">{{ total_items }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col p-2 my-auto">
+                                <div class="container d-flex flex-row justify-content-center align-items-center" id="overAllMean">
+                                    <i class="bi bi-people "style="font-size: 50px;"></i>
+                                    <div class="container d-flex flex-column">
+                                        <p class="m-0 lh-1 pt-2" style="font-size: 16px;">Respondents:</p>
+                                        <h2 class="m-0">{{ total_respondents }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Table -->
+            <div class="container d-flex flex-column align-items-center" style="margin-top: 100px;">
+                
+                <div class="container d-flex flex-row align-items-center mb-3">
+                    <i class="bi bi-table fs-2 me-3"></i>
+                    <h3 class="m-0">Table Summmary</h3>
+                    <div class="d-flex flex-row ms-auto align-items-center px-3 py-1 fw-bold" style="background-color: rgb(212, 217, 222); border-radius: 5px;">
+                        <i class="bi bi-clipboard2-x fs-5 me-2"></i>
+                        Overall Mean: {{ overall_mean }}
+                    </div>
+                </div>
+                
+                <table class="table table-hover table-bordered text-center">
+                    <thead>
+                      <tr style="color: rgb(5, 34, 74);">
+                        <th scope="col">Question #</th>
+                        {% for i in response_items %}
+                         <th scope="col"> {{ loop.index }}</th>
+                         <th scope="col">WT({{ loop.index }})</th>
+                        {% endfor %}         
+
+                        <th scope="col">Total Weight</th>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Mean</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                       
+                        {% for key,value in q_and_f.items() %}
+                            <tr>
+                                <th scope="row">{{ key }}</th>
+                                {% for f in value %}
+                                <td>{{ f }}</td>
+                                <td>{{ f*loop.index }}</td>
+                                {% endfor %}
+                                
+                                <td>{{ tweight[key] }}</td>
+                                <td>{{ ranks[tweight[key]] }}</td>
+                                <td>{{ means[key] }}</td>
+                            </tr>
+                            
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- Detailed Statistics -->
+            <div class="container d-flex flex-column align-items-center" style="margin-top: 100px; margin-bottom: 100px;">
+                
+                <div class="container d-flex flex-row align-items-center">
+                    <i class="bi bi-file-earmark-spreadsheet-fill fs-2 me-3"></i>
+                    <h3 class="m-0">Detailed Statistics</h3>
+                </div>
+
+                <hr style="width: 100%;" class="mb-4 mt-2">
+
+                <div class="container" id="details" >
+
+                    <div class="row">
+
+                        <!-- List of Questions -->
+                        <div class="col-4 mt-2">
+                            <h5>List of Questions</h5>
+                          <div id="list-example" class="list-group">
+                            
+                            {% for q in questions %}
+                            <a class="list-group-item list-group-item-action" href="#list-item-{{ loop.index }}" +>
+                                <div class="d-flex flex-column">
+                                    <p class="m-0" style="font-size: 14px;">Question {{ loop.index }}:</p>
+                                    <h6 class="m-0">
+                                        {{ q }}
+                                    </h6>
+                                </div>
+                            </a>
+                            {% endfor %}
+
+                          </div>
+                        </div>
+
+                        <!-- Scrollable Deets Card -->
+                        <div class="col-8">
+
+                          <div data-bs-spy="scroll" data-bs-root-margin="0px 0px -20%" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example overflow-auto p-3" tabindex="0" style="max-height: 700px;" id="style-5">
+
+                            {% for q in questions %}
+                            <div class="container overflow-x-auto" id="deetsCard">
+                                <p class="ps-3 py-1" id="list-item-{{ loop.index }}" style="background-color: rgb(224, 228, 234); border-radius: 5px;">Question {{ loop.index }}</p>
+                                <h4> {{ q }} </h4>
+
+                                <div class="container my-4">
+                                    <div class="container m-0 p-0">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex align-items-center" style="background-color: rgba(52, 167, 255, 0.248); color: rgb(13, 61, 120);">
+                                                <i class="bi bi-clipboard-data me-2"></i>
+                                                Frequencies Summary
+                                                </li>
+                                            {% for r in response_items %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{ r }}
+                                                <span class="badge bg-primary rounded-pill">{{ q_and_f[q][loop.index - 1] }}</span>
+                                            </li>
+                                            {% endfor %}
+                                            </ul>
+                                            
+                                    </div>
+                                </div>
+
+                                <div class="container d-flex flex-column">
+                                    
+                                        <div class="container m-0 mb-2 p-2 d-flex flex-row align-items-center" style="border: 3px solid rgba(30, 101, 200, 0.707); 
+                                        border-radius: 10px; color: rgb(48, 132, 250);">
+                                            <i class="bi bi-star fs-3 me-2"></i>
+                                            <p class="m-0 f-2">Mode:</p>
+                                            <h4 class="m-0 ms-auto">Strongly Agree</h4>
+                                            <p class="m-0 ms-2 text-center px-3" 
+                                            style="background-color: rgba(48, 132, 250, 0.244); color: rgb(18, 69, 116); border-radius: 5px;">
+                                            Count: 14
+                                            </p>
+                                        </div>
+                                    
+                                    
+                                        <div class="container m-0 my-2 mb-4 p-2 d-flex flex-row align-items-center" style="background-color: rgb(48, 132, 250); 
+                                        border-radius: 10px; color: rgb(255, 255, 255);">
+                                            <i class="bi bi-align-center fs-3 me-2"></i>
+                                            <p class="m-0 f-2">Median:</p>
+                                            <h4 class="m-0 ms-auto">Strongly Agree</h4>
+                                            <p class="m-0 ms-2 text-center px-3" 
+                                            style="background-color: rgb(255, 255, 255); color: rgb(18, 69, 116); border-radius: 5px;">
+                                            9.5th position
+                                            </p>
+                                        </div>
+                                    
+                                </div>
+
+                                <div class="container table-responsive">
+                                    <table class="table table-hover table-bordered text-center">
+                                        <thead>
+                                          <tr style="color: rgb(5, 34, 74);">
+                                            {% for i in response_items %}
+                                            <th scope="col"> {{ loop.index }}</th>
+                                            <th scope="col">WT({{ loop.index }})</th>
+                                           {% endfor %}  
+                                            <th scope="col">Total Weight</th>
+                                            <th scope="col">Rank</th>
+                                            <th scope="col">Mean</th>
+
+                                          </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr>
+                                                {% for f in q_and_f[q] %}
+                                                <td>{{ f }}</td>
+                                                <td>{{ f*loop.index }}</td>
+                                                {% endfor %}
+                                                
+                                                <td>{{ tweight[q] }}</td>
+                                                <td>{{ ranks[tweight[q]] }}</td>
+                                                <td>{{ means[q] }}</td>
+                                            </tr>
+                                            
+                                          <!-- <tr>
+                                            <td>00</th>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                            <td>00</td>
+                                          </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="container my-4">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="container m-0 p-2 d-flex flex-row align-items-center" style="border: 1px solid rgb(171, 174, 177); 
+                                            border-radius: 10px; color: rgb(89, 91, 93);">
+
+                                                <p class="m-0 p-1 px-2 me-2" style="background-color: rgb(144, 150, 151); border-radius: 5px; color: white;">
+                                                    σ<sup>2</sup></p>
+                                                <p class="m-0">Variance:</p>
+                                                <h4 class="m-0 ms-auto">000.00</h4>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="container m-0 p-2 d-flex flex-row align-items-center" style="border: 1px solid rgb(171, 174, 177); 
+                                            border-radius: 10px; color: rgb(89, 91, 93);">
+
+                                                <p class="m-0 p-1 px-2 me-2" style="background-color: rgb(144, 150, 151); border-radius: 5px; color: white;">
+                                                    σ</p>
+                                                <p class="m-0">Standard Variation:</p>
+                                                <h4 class="m-0 ms-auto">000.00</h4>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container d-flex flex-row justify-content-end">
+                
+                                    <button type="button" class="btn btn-outline-secondary btn-md px-4 mx-2" data-bs-toggle="modal" data-bs-target="#GraphModal1">
+                                        <i class="bi bi-bar-chart me-1"></i>
+                                        Graph
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary btn-md px-4" data-bs-toggle="modal" data-bs-target="#FormulaModal1">
+                                        <i class="bi bi-calculator me-1"></i>
+                                        Formula
+                                    </button>
+                                    
+                                </div>
+
+                                <!-- Modals for Graph and Formula -->
+
+                                <!-- Graph Modal -->
+                                <div class="modal fade" id="GraphModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                                    <div class="modal-dialog modal-dialog-centered" >
+                                      <div class="modal-content" style="box-shadow: 0 15px 25px rgba(0,0,0,0.1);">
+                                        <div class="modal-header">
+                                            <i class="bi bi-bar-chart me-2 fs-4"></i>
+                                          <h1 class="modal-title fs-5" id="exampleModalLabel">Graph of the Data</h1>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="ps-3 py-1" id="list-item-{{ loop.index }}" style="background-color: rgb(224, 228, 234); border-radius: 5px;">Question 1: 
+                                                <span class="fw-bold">I play video game because it is addicting.</span>
+                                            </p>
+                                            
+                                            <div class="container my-3 d-flex flex-column" style="height: 300px; background-color: rgb(228, 233, 235); border-radius: 10px;">
+                                                <i class="bi bi-bar-chart m-auto" style="font-size: 200px;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!-- Formula -->
+                                <div class="modal fade" id="FormulaModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+                                    <div class="modal-dialog modal-dialog-centered" >
+                                    <div class="modal-content" style="box-shadow: 0 15px 25px rgba(0,0,0,0.1);">
+                                        <div class="modal-header">
+                                            <i class="bi bi-calculator me-2 fs-4"></i>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Formulas and Calculations</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="ps-3 py-1" id="list-item-{{ loop.index }}" style="background-color: rgb(224, 228, 234); border-radius: 5px;">Question 1: 
+                                                <span class="fw-bold">I play video game because it is addicting.</span>
+                                            </p>
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                        <i class="bi bi-file-earmark-x me-2"></i>
+                                                        Mean
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="meanFormula">
+                                                            Formulas for Mean: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                                        <i class="bi bi-input-cursor-text me-2"></i>
+                                                        Median
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="Median Formula">
+                                                            Formulas for Median: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                                        <i class="bi bi-star me-2"></i>
+                                                        Mode
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="modeFormula">
+                                                            Formulas for Mode: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                                        <i class="bi bi-sliders2-vertical me-2"></i>
+                                                        Weight
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="weightFormula">
+                                                            Formulas for Weight: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                                        <i class="bi bi-sliders me-2"></i>
+                                                        Total Weight
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="totalWeightFormula">
+                                                            Formulas for Total Weight: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                                        <i class="bi bi-list-ol me-2"></i>
+                                                        Rank
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="rankFormula">
+                                                            Formulas for Rank: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                                        <i class="bi bi-bar-chart me-2"></i>
+                                                        Variance
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapse7" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="varianceFormula">
+                                                            Formulas for Variance: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed d-flex flex-row" type="button" data-bs-toggle="collapse" data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                                        <i class="bi bi-bar-chart-fill me-2"></i>
+                                                        Standard Variation
+                                                    </button>
+                                                    </h2>
+                                                    <div id="collapse8" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <div class="container d-flex flex-column" id="sdFormula">
+                                                            Formulas for Standard Variation: <br><br> <hr>
+                                                            Substituted Values: <br><br> <hr>
+                                                            Final Answer: <br><br>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
+                                            
+                                            
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {% endfor %}
+                            
+
+                            <!-- End of deez nuts card -->
+
+                            
+                          </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+
+</html>
+
+
+

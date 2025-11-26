@@ -1,0 +1,193 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RankStat</title>
+
+    <link rel = "icon" href = "{{ url_for('static', filename = 'statistics.png') }}">   
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/bootstrap.min.css')}}">   
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/style.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/stepper.css') }}">
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="" id="InputOutput">
+      
+      <section class="step-wizard">
+        <ul class="step-wizard-list mb-4">
+            <li class="step-wizard-item">
+                <span class="progress-count">1</span>
+                <span class="progress-label">Questions & Response Items</span>
+            </li>
+            <li class="step-wizard-item current-item">
+                <span class="progress-count">2</span>
+                <span class="progress-label">Question Names & Frequencies</span>
+            </li>
+            <li class="step-wizard-item ">
+                <span class="progress-count">3</span>
+                <span class="progress-label">Displaying Output</span>
+            </li>
+        </ul>
+        <div class="containe " id="input1">
+  
+          <form action="/goto_part3" method='POST'>
+  
+          <div class="container d-flex flex-column p-0 input-wrapper" id="inputGroup">
+            <div class="container p-4">
+              <div class="container m-0 p-0 d-inline-flex">
+                <p class="p-1 px-3 m-0 mb-2" style="color: rgb(0, 170, 255); border: 2px solid rgb(0, 170, 255); border-radius: 5px;">
+                  Part 2:
+                </p>
+              </div>
+    
+              <h2 class="mb-1">Question Names and Its Frequencies</h2>
+            </div>
+              <div class="container m-0 p-4" id="questions">
+
+              <div class="container" id="questionObj">
+
+                <div class="container m-0 p-0 d-inline-flex">
+                  <p class="p-1 px-3 m-0 mb-4" style="color: rgb(242, 246, 248); border-radius: 5px; background-color: rgb(91, 96, 98);">
+                    Question 1
+                  </p>
+                </div>
+                <div class="mb-4">
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter question name here..." name = "question">
+                </div>
+      
+                <div class="container p-0">
+                  <label for="ResponseItems" class="form-label">Enter Respective Response Items Frequencies</label>
+
+                  {% for item in items %} 
+                  <div class="input-group flex-nowrap py-2">
+                    <span class="input-group-text px-4" id="addon-wrapping">{{ loop.index }}</span>
+                    <span class="input-group-text px-4" id="addon-wrapping-label">{{ item }}</span>
+                    <input type="number" class="form-control" placeholder="0.00" aria-describedby="addon-wrapping" name = "num">
+                    
+                  </div>
+                  {% endfor %}  
+                  
+                    
+                
+                  <div class="container p-0 d-flex flex-row">
+                    <button class="btn btn-outline-secondary mt-3 mb-4 me-3" type="button" id="button-addon1" style="min-width:auto; border-radius: 5px;">
+                      <i class="bi bi-x-circle"></i>
+                      Clear Fields
+                    </button>
+                    <button class="btn btn-outline-secondary mt-3 mb-4 px-3" type="button" id="button-addon1" style="min-width:auto; border-radius: 5px;">
+                      <i class="bi bi-trash3"></i>
+                      Remove Question
+                    </button>
+                  </div>
+                  
+      
+                </div>
+              </div>
+
+              <div class="container" id="questionObj">
+
+                <div class="container m-0 p-0 d-inline-flex">
+                  <p class="p-1 px-3 m-0 mb-4" style="color: rgb(242, 246, 248); border-radius: 5px; background-color: rgb(91, 96, 98);">
+                    Question 2
+                  </p>
+                </div>
+
+                <div class="mb-4">
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter question name here..." name = "question">
+                </div>
+      
+                <div class="container p-0">
+                  <label for="ResponseItems" class="form-label">Enter Respective Response Items Frequencies</label>
+                  {% for item in items %} 
+                  <div class="input-group flex-nowrap py-2">
+                    <span class="input-group-text px-4" id="addon-wrapping">{{ loop.index }}</span>
+                    <span class="input-group-text px-4" id="addon-wrapping-label">{{ item }}</span>
+                    <input type="number" class="form-control" placeholder="0.00" aria-describedby="addon-wrapping" name = "num">
+                    
+                  </div>
+                  {% endfor %}  
+
+
+                  <div class="container p-0 d-flex flex-row">
+                    <button class="btn btn-outline-secondary mt-3 mb-4 me-3" type="button" id="button-addon1" style="min-width:auto; border-radius: 5px;">
+                      <i class="bi bi-x-circle"></i>
+                      Clear Fields
+                    </button>
+                    <button class="btn btn-outline-secondary mt-3 mb-4 px-3" type="button" id="button-addon1" style="min-width:auto; border-radius: 5px;">
+                      <i class="bi bi-trash3"></i>
+                      Remove Question
+                    </button>
+                  </div>
+                  
+      
+                </div>
+              </div>
+            </div>
+
+            
+
+  
+          </div>
+          
+          <button class="btn btn-outline-secondary mt-2 mb-2 py-3 addquestion" type="button"
+            style="min-width:100%; border-radius: 5px;">
+              <i class="bi bi-file-earmark-plus"></i> Add Question
+            </button>
+
+          <div class="container d-flex flex-row-reverse p-3" id="btnGroup">
+            <button type="submit" class="btn btn-primary btn-lg px-4">Next</button>
+        </form>
+        <form action="/goto_part1" method='POST'>
+          <button type="submit" class="btn btn-outline-secondary btn-lg px-4 mx-3">Back</button>
+        </form>
+          </div>
+        </div>
+  
+      </section>
+  
+      
+  
+      </div>
+
+      <script>
+        $(document).ready(function(){
+            var max_input_fields = 10;
+            var add_input = $('.addquestion');
+            var input_wrapper = $('.input-wrapper');
+            var add_input_count = 2; 
+            $(add_input).click(function(){
+                if(add_input_count < max_input_fields){
+                    add_input_count++; 
+                    var new_input = '<div class="container m-0 p-4" id="questions"><div class="container" id="questionObj"><div class="container p-0"><div class="container m-0 p-0 d-inline-flex"><p class="p-1 px-3 m-0 mb-4" style="color: rgb(242, 246, 248); border-radius: 5px; background-color: rgb(91, 96, 98);">Question '+ add_input_count +'</p></div><div class="mb-4"><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter question name here..." name = "question"></div>      <label for="ResponseItems" class="form-label">Enter Respective Response Items Frequencies</label>{% for item in items %} <div class="input-group flex-nowrap py-2"><span class="input-group-text px-4" id="addon-wrapping">{{ loop.index }}</span><span class="input-group-text px-4" id="addon-wrapping-label">{{ item }}</span><input type="number" class="form-control" placeholder="0.00" aria-describedby="addon-wrapping" name = "num"></div>{% endfor %}<div class="container p-0 d-flex flex-row"><button class="btn btn-outline-secondary mt-3 mb-4 me-3" type="button" id="button-addon1" style="min-width:auto; border-radius: 5px;"><i class="bi bi-x-circle"></i> Clear Fields</button><button class="btn btn-outline-secondary mt-3 mb-4 px-3 remove-input" type="button" id="button-addon1" style="min-width:auto; border-radius: 5px;"><i class="bi bi-trash3"></i>Remove Question</button></div></div>';
+                    
+                    $(input_wrapper).append(new_input); 
+                }
+            });
+           
+            $(input_wrapper).on('click', '.remove-input', function(e){
+              e.preventDefault();
+              $(this).parent('div').parent('div').parent('div').parent('div').remove();
+              add_input_count--;
+      });
+        });
+        </script>
+    
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+
+</html>
+
+
+

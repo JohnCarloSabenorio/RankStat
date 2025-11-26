@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RankStat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/style.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/stepper.css') }}">
+    <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/bootstrap.min.css')}}">   
+
+    <link rel = "icon" href = "{{ url_for('static', filename = 'statistics.png') }}">   
+
+    <style>
+      .heroBG{
+        background-size : cover;
+        background-repeat:no-repeat;
+        background-position-y: 100%;
+
+        background-image: url({{url_for('static', filename = 'HeroBG.jpg')}});
+        
+      }
+
+    
+    </style>
+
+  </head>
+
+  <body class = "heroBG">
+
+    <div class="px-4 pt-5 mt-5 text-center">
+      <img src="{{url_for('static', filename='statistics.png')}}" alt="" width="72" height="72"/>
+      <h1 class="display-4 fw-bold text-body-emphasis">RankStat</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">No more waiting for results! RankStat's lightning-fast computations process even the largest data sets with blazing speed. Spend less time crunching numbers and more time extracting valuable insights! </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <form action="/goto_part1" method='POST'>
+          <button type="submit" class="btn btn-primary btn-lg px-4" value="Submit">Try it out.</button>
+          </form>
+        </div>
+      </div>
+      <div class="overflow-hidden" style="max-height: 30vh;">
+        <div class="container px-5">
+          <img src="{{url_for('static', filename='HeroPic.jpg')}}" class="img-fluid border rounded-3 shadow-lg mb-1" alt="Example image" width="700" height="500" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="C:\Users\johnc\Desktop\Group Project\js\bootstrap.min.js"></script>
+  </body>
+
+</html>
+
+
+

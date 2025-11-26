@@ -1,0 +1,142 @@
+@font-face {
+    font-family: GontLight;
+    src: url(fonts/Gontserrat-Light.ttf);
+}
+
+@font-face {
+    font-family: GontRegular;
+    src: url(fonts/Gontserrat-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: GontBold;
+    src: url(fonts/Gontserrat-ExtraBold.ttf);
+}
+
+
+.btn{
+    min-width: 150px;
+}
+
+.heroBG{
+    background-image: url("HeroBG.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+
+#input1{
+  background-color: white;
+  max-width: 800px;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+#inputGroup{
+  width: 100%;
+  min-height: 400px;
+  padding: 30px;
+}
+
+#btnGroup{
+  margin: 0;
+  width: 100%;
+  min-height: 75px;
+  border-top: 0.5px solid rgba(110, 102, 102, 0.674);
+}
+
+#delBtn{
+  cursor: pointer;
+}
+
+
+#questions{
+  background-color: rgb(216, 218, 223);
+  min-height: 400px;
+}
+
+#questionObj{
+  background-color: rgb(255, 255, 255);
+  padding: 50px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 0.5px solid rgba(128, 128, 128, 0.567);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+input[type="number"] {
+  text-align: right;
+  padding-right: 10px;
+}
+
+input[type="number"]::placeholder {
+  text-align: right;
+}
+
+#addon-wrapping-label{
+  min-width: 200px;
+  background-color: white;
+}
+
+.rounded-pill{
+  font-weight: 400;
+  padding: 5px 10px;
+}
+
+
+#resultsPage{
+  margin: 0;
+  padding: 0;
+  background-color: #21d4fd;
+  background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+  min-height: 1000px;
+}
+
+#whitePage{
+  margin-top: 75px;
+  margin-bottom: 75px;
+  padding: 50px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 0.5px solid rgba(128, 128, 128, 0.567);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+
+#bluGradient{
+  margin: 30px 0;
+  background-color: #21d4fd;
+  background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+  height: 200px;
+  border-radius: 10px;
+}
+
+#whiteUnderBlu{
+  min-width: 40%;
+  max-width: 70%;
+  min-height: 80px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 0.3px solid rgba(128, 128, 128, 0.567);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+
+#overAllMean{
+  padding: 10px;
+  padding-left: 25px;
+  background-color: #00b7ff65;
+  border-radius: 10px;
+  color: #01509a;
+}
+
+#deetsCard{
+  padding: 30px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 0.2px solid rgba(128, 128, 128, 0.241);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
